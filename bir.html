@@ -5,14 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy Birthday Jaanuhh...</title>
     <style>
-        body {
+
+        
+        body 
+        
+        {
+
+        
             font-family: 'Arial', sans-serif;
             background-color: #ffe6f2;
             color: #333;
             margin: 0;
             padding: 0;
             overflow-x: hidden;
+
+             margin: 0;
+            overflow-x: hidden;
+            font-family: Arial, sans-serif;
         }
+
+        .content {
+            padding: 20px;
+            text-align: center;
+            margin-top: 50px;
+        }
+        
+        .popper {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background-color: #f00;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+        }   
         
         .container {
             max-width: 800px;
@@ -278,6 +304,76 @@
     </style>
 </head>
 <body>
+
+    <div class="content">
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Duration in milliseconds (3000ms = 3 seconds)
+            const duration = 3500;
+            const colors = [
+                '#ff0000', '#00ff00', '#0000ff', '#ffff00', 
+                '#ff00ff', '#00ffff', '#ff8800', '#ff0088'
+            ];
+            
+            let startTime = Date.now();
+            
+            function createPopper() {
+                const now = Date.now();
+                const elapsed = now - startTime;
+                
+                if (elapsed < duration) {
+                    // Create multiple poppers at once for a richer effect
+                    for (let i = 0; i < 5; i++) {
+                        const popper = document.createElement('div');
+                        popper.className = 'popper';
+                        
+                        // Random position at the top of the screen
+                        const startX = Math.random() * window.innerWidth;
+                        popper.style.left = startX + 'px';
+                        popper.style.top = '0';
+                        
+                        // Random color
+                        popper.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                        
+                        document.body.appendChild(popper);
+                        
+                        // Animation
+                        const animationDuration = Math.random() * 3 + 2; // 2-5 seconds
+                        
+                        // Animate the popper
+                        popper.animate([
+                            { 
+                                transform: 'translateY(0) scale(1)',
+                                opacity: 1 
+                            },
+                            { 
+                                transform: `translateY(${Math.random() * window.innerHeight}px) 
+                                            translateX(${(Math.random() - 0.5) * 200}px) 
+                                            scale(${Math.random() * 0.5 + 0.5})`,
+                                opacity: 0 
+                            }
+                        ], {
+                            duration: animationDuration * 1000,
+                            easing: 'cubic-bezier(0.1, 0.8, 0.2, 1)'
+                        });
+                        
+                        // Remove popper after animation
+                        setTimeout(() => {
+                            popper.remove();
+                        }, animationDuration * 1000);
+                    }
+                    
+                    // Continue creating poppers until duration is reached
+                    requestAnimationFrame(createPopper);
+                }
+            }
+            
+            // Start the effect
+            createPopper();
+        });
+    </script>
     <!-- Page 1 - Photo Slideshow -->
     <div class="container page active" id="page1">
         <h1>Happy Birthday Jaanuhh...💗</h1>
@@ -492,7 +588,7 @@
             
             <p>Even if I'm no longer part of your life, please know that someone out here still thinks of you fondly, still remembers your birthday with warmth, and still wishes nothing but the best for you.</p>
             
-            <p>Happy Birthday, [Her Name]. May your day be as wonderful as you are.</p>
+            <p>Happy Birthday, Jemi . May your day be as wonderful as you are.</p>
         </div><br>
        
         
@@ -502,7 +598,7 @@
     </div>
     
     <footer>
-        Created with love for [Her Name]'s birthday
+        Created with love for Jemi's birthday
     </footer>
     
     <!-- Audio Player (hidden) -->
@@ -547,7 +643,7 @@
         // Auto-advance slides every 5 seconds
         setInterval(() => {
             plusSlides(1);
-        }, 5000);
+        }, 2000);
         
         // Page navigation
         function showPage(pageId) {
